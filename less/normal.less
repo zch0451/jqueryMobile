@@ -1,0 +1,152 @@
+*{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+a{
+  text-decoration: none;
+  color: inherit;
+}
+textarea{
+  resize: none;
+}
+ol, ul {
+  list-style: none; }
+.lf{
+  float: left;
+}
+.rt{
+  float: right;
+}
+.inlineB{
+  display: inline-block;
+}
+.clearfix:after{
+  content: '';
+  display: table;
+  clear: both;
+}
+.h100{
+  height: 100%;
+}
+.w100{
+  width: 100%;
+}
+.relative{
+  position: relative;
+}
+.flexScss{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  align-content: flex-start;
+  .c{
+    flex-direction: column;
+  }
+}
+.flex-box{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.flex{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1;
+  -ms-flex: 1 1;
+  flex: 1 1;
+}
+.my-table{
+  border-collapse: collapse;
+  color: inherit;
+  table-layout: fixed;
+  width: 100%;
+  border: 1px solid #373d61;
+  border-bottom: none;
+  text-align: center;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  &.border{
+    th:not(:last-child),td:not(:last-child){
+      border-right: 1px solid #373d61;
+    }
+  }
+  th,td{
+    border-bottom: 1px solid #373d61;
+    height: 34px;
+    vertical-align: middle;
+    white-space: nowrap;
+    overflow: hidden;
+    -ms-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+  }
+}
+.absolute{
+  position: absolute;
+}
+.ellipsis{
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.text-center{
+  text-align: center;
+}
+.text-right{
+  text-align: right;
+}
+.vm{
+  vertical-align: middle;
+}
+
+
+//loading
+.loadingbox{
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255,255,255,.8);
+  z-index: 10000;
+}
+.loading{
+  width: 80px;
+  height: 40px;
+  margin: 0 auto;
+  margin-top:100px;
+}
+.loading span{
+  display: inline-block;
+  width: 8px;
+  height: 100%;
+  border-radius: 4px;
+  background: #5badf2;
+  -webkit-animation: load 1s ease infinite;
+}
+@-webkit-keyframes load{
+  0%,100%{
+    height: 40px;
+  }
+  50%{
+    height: 70px;
+    margin: -15px 0;
+  }
+}
+.loading span:nth-child(2){
+  -webkit-animation-delay:0.2s;
+}
+.loading span:nth-child(3){
+  -webkit-animation-delay:0.4s;
+}
+.loading span:nth-child(4){
+  -webkit-animation-delay:0.6s;
+}
+.loading span:nth-child(5){
+  -webkit-animation-delay:0.8s;
+}
