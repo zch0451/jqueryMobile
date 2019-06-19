@@ -3,17 +3,16 @@
   top: 0;
   left: 0;
   right: 0;
-  bottom: 0;
   z-index: 10;
 }
 
 #container {
-  height: 40%;
+  height: 5rem;
   position: relative;
 }
 
 .addressList {
-  height: 60%;
+  min-height: 7rem;
   width: 100%;
   overflow: hidden;
 }
@@ -36,6 +35,9 @@
   height: 50px;
   padding: 15px;
   cursor: pointer;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
   &.checked:after{
     content: '';
     display: block;
@@ -57,5 +59,33 @@
   .address{
     color: #888;
     font-size: 12px;
+  }
+}
+
+
+.map-search{
+  .wrap-card{
+    padding-left: 15px;
+    padding-right: 15px;
+    margin: 10px auto;
+    .wrap-title{
+      height:40px;
+      line-height: 40px;
+      font-size: 15px;
+    }
+    .wrap-body{
+      padding-bottom: 10px;
+      textarea{
+        font-family: inherit!important;
+        width: 100%;
+        background-color: #f2f2f2;
+        border: 0;
+        outline: none;
+        font-size: 14px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0 15px;
+      }
+    }
   }
 }

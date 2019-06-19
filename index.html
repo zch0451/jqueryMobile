@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jquery_mobile</title>
+    <link rel="stylesheet" href="plug/select/mobileSelect.css">
+    <link rel="stylesheet" href="plug/scroll/minirefresh.min.css">
+    <link rel="stylesheet" href="plug/layer/need/layer.css">
+    <link rel="stylesheet" href="less/normal.css">
+    <link rel="stylesheet" href="less/map.css">
+</head>
+<body>
+<!--scroll-->
+<div class="minirefresh-wrap" id="minirefresh">
+    <div class="minirefresh-scroll">
+        <div>
+            <button id="sxSelect">下拉菜单</button>
+        </div>
+        <div>
+            <button id="layer">弹框</button>
+        </div>
+        <div id="container">
+
+        </div>
+        <img src="./img/map/local.png" alt="" class="local">
+        <div class="addressList" id="log">
+            <div class="addressItem checked" id="mainAddress" style="line-height: 50px">
+            </div>
+            <div id="around"></div>
+        </div>
+    </div>
+</div>
+<script src="plug/jquery-1.11.0.min.js"></script>
+<script src="plug/response/adaptive-version2.js"></script>
+<script type="text/javascript" src="./plug/scroll/minirefresh.min.js"></script>
+<script src="plug/response/WindowSize.js"></script>
+<script src="plug/select/mobileSelect.js"></script>
+<script src="plug/jquery.form.js"></script>
+<script src="plug/jquery.values.js"></script>
+<script src="plug/layer/layer.js"></script>
+<script src="js/normal.js"></script>
+<script src="js/scroll.js"></script>
+<script>
+    initScroll(function(miniRefresh){
+        console.log('上拉加载更多');
+        miniRefresh.endUpLoading(true);
+    })
+    var mobileSelect1 = new MobileSelect({
+        trigger: '#sxSelect',
+        title: '下拉选择',
+        wheels: [
+            {data: ['菜单1','菜单2','菜单3']}
+        ],
+        callback:function(data) {
+            var index=data[0];
+            console.log(index);
+        }
+    });
+    $('#layer').click(function(){
+        layer.open({
+            content: '这是layer弹出层'
+            ,btn: ['我知道了'],
+        })
+    })
+</script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=z0axxkReLy5KUR5HE5OOZIH6PNvbAsUc"></script>
+<script src="js/map.js"></script>
+<script>
+//map
+    new MyMap('container', 20)
+    $('#log').on('click', '.addressItem', function () {
+        $(this).addClass('checked').siblings().removeClass('checked');
+        var address;
+        if ($(this).find('.title').length > 0) {
+            address = $(this).find('.address').text();
+        } else {
+            address = $(this).text();
+        }
+        form.coordinateX = $(this).data('x');
+        form.coordinateY = $(this).data('y');
+        $('#mapAddress').html(address);
+        $('#mapGroup').hide()
+        $('#myform').show()
+    })
+</script>
+</body>
+</html>

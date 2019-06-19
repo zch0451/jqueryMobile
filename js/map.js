@@ -2,6 +2,8 @@ function MyMap(id,level){//东经，北纬，级别
     this.level=level;
     this.point=null;
     this.map=new BMap.Map("container");
+    this.myGeo = new BMap.Geocoder();
+    this.title='';
     this.init();
 }
 MyMap.prototype={
@@ -25,34 +27,51 @@ MyMap.prototype={
     },
     getName:function(){
         var myGeo = new BMap.Geocoder();
+        var me=this;
         myGeo.getLocation(new BMap.Point(this.point.lng, this.point.lat), function(result){
             if (result){
                 console.log(result)
                 $('#mainAddress').html(result.address).data('x',result.point.lng).data('y',result.point.lat);
                 var arround='';
-
+                me.title=result.address;
                 result.surroundingPois.forEach(function(item,index){
                     var tpl='<div class="addressItem" data-x="'+item.point.lng+'" data-y="'+item.point.lat+'">\n' +
                     '        <div class="title">{#title#}</div>\n' +
                     '        <div class="address">{#address#}</div>\n' +
-                    '    </div>'
-                    if(index>2){
-                        return false;
-                    }
+                    '    </div>';
                     arround+=myApi.tpl(tpl,item);
                 })
                 document.getElementById('around').innerHTML=arround;
                 $('#mapAddress').html(result.address);
-                form.coordinateX=result.point.lng;
-                form.coordinateY=result.point.lat;
             }
         });
+    },
+    getLocalBySearch:function(str){
+        var me=this;
+        me.myGeo.getPoint(str, function(point){
+                if (point) {
+                    me.map.centerAndZoom(point, me.level);
+                    me.map.addOverlay(new BMap.Marker(point));
+                    me.point=point;
+                    me.getName();
+                }
+            },
+            this.title);
     },
     bindEvent:function(){
         var me=this;
         this.map.addEventListener("dragend", function(){
             me.point=me.map.getCenter();
             me.getName();
+        })
+        $('#mapSearch').bind('input',function(){
+            var _input=this;
+            if(this.timer){
+                clearTimeout(this.timer);
+            }
+            this.timer=setTimeout(function(){
+                me.getLocalBySearch($(_input).val());
+            },1000)
         })
     }
 
